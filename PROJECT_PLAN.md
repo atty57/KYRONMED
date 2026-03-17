@@ -1,8 +1,5 @@
-# KyronMed AI Scheduling Assistant — Project Plan
+# KyronMed AI Scheduling Assistant - Project Plan
 
-## Deadline: Tuesday, March 17, 8:00 PM ET
-
----
 
 ## 1. Architecture Overview
 
