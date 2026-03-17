@@ -1,0 +1,72 @@
+{
+  "name": "KyronMed Physician Group",
+  "tagline": "Comprehensive Care, Powered by Technology",
+  "phone": "(302) 555-8700",
+  "fax": "(302) 555-8701",
+  "email": "info@kyronmed.com",
+  "website": "https://kyronmed.com",
+  "locations": [
+    {
+      "name": "KyronMed Main Campus",
+      "address": "1200 Medical Center Drive, Suite 300, Wilmington, DE 19801",
+      "phone": "(302) 555-8700",
+      "hours": {
+        "monday": "8:00 AM – 5:00 PM",
+        "tuesday": "8:00 AM – 5:00 PM",
+        "wednesday": "8:00 AM – 5:00 PM",
+        "thursday": "8:00 AM – 5:00 PM",
+        "friday": "8:00 AM – 4:00 PM",
+        "saturday": "9:00 AM – 1:00 PM (Urgent Care Only)",
+        "sunday": "Closed"
+      },
+      "parking": "Free parking available in the attached garage. Enter from Medical Center Drive.",
+      "transit": "Bus routes 2 and 15 stop at Medical Center Drive."
+    },
+    {
+      "name": "KyronMed Newark Office",
+      "address": "450 Elkton Road, Suite 110, Newark, DE 19711",
+      "phone": "(302) 555-8710",
+      "hours": {
+        "monday": "9:00 AM – 5:00 PM",
+        "tuesday": "9:00 AM – 5:00 PM",
+        "wednesday": "9:00 AM – 5:00 PM",
+        "thursday": "9:00 AM – 5:00 PM",
+        "friday": "9:00 AM – 3:00 PM",
+        "saturday": "Closed",
+        "sunday": "Closed"
+      },
+      "parking": "Free parking lot behind the building.",
+      "transit": "Near UD STAR Campus. Bus route 6."
+    }
+  ],
+  "insurance": [
+    "Aetna",
+    "Blue Cross Blue Shield",
+    "Cigna",
+    "Humana",
+    "Medicare",
+    "Medicaid (DE)",
+    "United Healthcare",
+    "Tricare",
+    "Highmark",
+    "AmeriHealth"
+  ],
+  "newPatientInfo": {
+    "whatToBring": [
+      "Photo ID (driver's license or passport)",
+      "Insurance card(s)",
+      "List of current medications",
+      "Any relevant medical records or referral letters",
+      "Co-pay (if applicable)"
+    ],
+    "referralRequired": "Referrals are required for specialist visits if your insurance plan mandates one. Dr. Chen (Family Medicine) and Dr. Thompson (Pediatrics) do not require referrals.",
+    "arriveEarly": "Please arrive 15 minutes before your scheduled appointment to complete paperwork.",
+    "cancellationPolicy": "We ask for at least 24 hours notice for cancellations or reschedules. Late cancellations may be subject to a $25 fee."
+  },
+  "prescriptionRefills": {
+    "turnaround": "Refill requests are typically processed within 24-48 business hours.",
+    "process": "Your provider will review the request and send it directly to your pharmacy.",
+    "controlled": "Controlled substance refills require an in-person or telehealth visit with your provider."
+  },
+  "afterHoursInfo": "For after-hours urgent concerns, call our main line at (302) 555-8700 and follow the prompts for the on-call provider. For emergencies, call 911."
+}

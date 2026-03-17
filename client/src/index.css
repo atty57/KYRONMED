@@ -1,0 +1,350 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ──────────────────────────────────── */
+:root {
+  --kyron-primary: #0066CC;
+  --kyron-primary-light: #3B9AFF;
+  --kyron-accent: #00D4AA;
+  --kyron-bg-start: #060e1a;
+  --kyron-bg-mid: #0c1929;
+  --kyron-bg-end: #111d32;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--kyron-bg-start);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0, 102, 204, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(0, 212, 170, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, var(--kyron-bg-start) 0%, var(--kyron-bg-mid) 50%, var(--kyron-bg-end) 100%);
+  min-height: 100vh;
+  color: #e2e8f0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Glass System ─────────────────────────── */
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(14px) saturate(1.5);
+    -webkit-backdrop-filter: blur(14px) saturate(1.5);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1.5px 0 rgba(255, 255, 255, 0.20), inset 1px 0 0 rgba(255, 255, 255, 0.07);
+  }
+
+  .glass-strong {
+    background: rgba(11, 22, 38, 0.72);
+    backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
+    -webkit-backdrop-filter: blur(28px) saturate(1.6) brightness(1.05);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-input {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-input:focus {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(59, 154, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(59, 154, 255, 0.1), 0 0 20px rgba(59, 154, 255, 0.05);
+    outline: none;
+  }
+}
+
+/* ── Chat Scrollbar ──────────────────────── */
+.chat-scroll::-webkit-scrollbar { width: 5px; }
+.chat-scroll::-webkit-scrollbar-track { background: transparent; }
+.chat-scroll::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 10px; }
+.chat-scroll::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.15); }
+
+/* ── Typing Indicator ────────────────────── */
+.typing-dot {
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── Pulse Ring (call active indicator) ──── */
+@keyframes pulseRing {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* ── Gradient Text ───────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #3B9AFF 0%, #00D4AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Ambient Glow ────────────────────────── */
+.ambient-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Animated Gradient Text ──────────────── */
+.text-gradient-animated {
+  background: linear-gradient(135deg, #3B9AFF 0%, #00D4AA 30%, #a78bfa 60%, #3B9AFF 100%);
+  background-size: 250% 250%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 6s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Ambient Orb Breathing ───────────────── */
+.ambient-pulse-1 { animation: ambientFloat1  9s ease-in-out infinite; }
+.ambient-pulse-2 { animation: ambientFloat2 13s ease-in-out infinite; }
+.ambient-pulse-3 { animation: ambientFloat3 17s ease-in-out infinite; }
+
+@keyframes ambientFloat1 {
+  0%, 100% { transform: translate(0,     0)    scale(1);    opacity: 0.12; }
+  50%       { transform: translate(28px, -18px) scale(1.09); opacity: 0.19; }
+}
+@keyframes ambientFloat2 {
+  0%, 100% { transform: translate(0,      0)    scale(1);    opacity: 0.10; }
+  40%       { transform: translate(-22px, 18px)  scale(1.11); opacity: 0.17; }
+  70%       { transform: translate(12px,  -10px) scale(0.94); opacity: 0.07; }
+}
+@keyframes ambientFloat3 {
+  0%, 100% { transform: translate(0,    0)    scale(1);    opacity: 0.09; }
+  60%       { transform: translate(20px, 14px) scale(1.06); opacity: 0.16; }
+}
+
+/* ── Card Pulse Glow ─────────────────────── */
+.card-pulse-glow {
+  animation: cardGlow 5s ease-in-out infinite;
+}
+
+@keyframes cardGlow {
+  0%, 100% {
+    box-shadow:
+      0 24px 64px rgba(0,0,0,0.4),
+      0 8px 24px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 0 0 1px rgba(255,255,255,0.06),
+      0 0 30px rgba(59,154,255,0.04);
+  }
+  50% {
+    box-shadow:
+      0 24px 64px rgba(0,0,0,0.4),
+      0 8px 24px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 0 0 1px rgba(59,154,255,0.22),
+      0 0 48px rgba(59,154,255,0.10),
+      0 0 90px rgba(0,212,170,0.05);
+  }
+}
+
+/* ── Holographic Shimmer Sweep ───────────── */
+@keyframes shimmerSlide {
+  0%   { transform: translateX(-120%) skewX(-12deg); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(120%)  skewX(-12deg); opacity: 0; }
+}
+
+.message-shimmer-once {
+  position: relative;
+  overflow: hidden;
+}
+.message-shimmer-once::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(59,154,255,0.07) 50%,
+    rgba(0,212,170,0.05) 55%,
+    transparent 70%
+  );
+  animation: shimmerSlide 1.4s ease-out 0.15s 1 forwards;
+  pointer-events: none;
+}
+
+/* ── Neon Status Dot ─────────────────────── */
+@keyframes neonPulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(52,211,153,0.7), 0 0 6px  rgba(52,211,153,0.4); }
+  50%       { box-shadow: 0 0 0 5px rgba(52,211,153,0),   0 0 12px rgba(52,211,153,0.3); }
+}
+.status-dot-neon {
+  animation: neonPulse 2.4s ease-in-out infinite;
+}
+
+/* ── Scanline Overlay ────────────────────── */
+.scanline-overlay {
+  position: relative;
+}
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.025) 3px,
+    rgba(0,0,0,0.025) 4px
+  );
+  pointer-events: none;
+  z-index: 2;
+  border-radius: inherit;
+}
+
+/* ── HUD Corner Brackets ─────────────────── */
+.hud-corners {
+  position: relative;
+}
+.hud-corners::before,
+.hud-corners::after {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  pointer-events: none;
+  z-index: 5;
+}
+.hud-corners::before {
+  top: -1px;
+  left: -1px;
+  border-top: 1.5px solid rgba(59,154,255,0.5);
+  border-left: 1.5px solid rgba(59,154,255,0.5);
+  border-radius: 3px 0 0 0;
+}
+.hud-corners::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 1.5px solid rgba(0,212,170,0.45);
+  border-right: 1.5px solid rgba(0,212,170,0.45);
+  border-radius: 0 0 3px 0;
+}
+
+/* ── Admin Table ─────────────────────────── */
+.admin-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgba(148, 163, 184, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.admin-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.admin-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Liquid Glass Frame ───────────────────── */
+/* Wrapper that adds liquid-glass distortion + bevel to the chat card */
+.liquid-glass-frame {
+  position: relative;
+  border-radius: 16px;
+  isolation: isolate;
+}
+
+/* Background displacement layer — warps the backdrop through glass edges */
+.liquid-glass-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  filter: url(#kyron-liquid);
+  backdrop-filter: blur(0px); /* triggers compositing layer, not visual blur */
+  -webkit-backdrop-filter: blur(0px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Specular bevel + slow iridescent sheen */
+.liquid-glass-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(59, 154, 255, 0.04) 20%,
+    transparent 45%,
+    rgba(0, 212, 170, 0.03) 75%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.28),
+    inset 1.5px 0 0 rgba(255, 255, 255, 0.10),
+    inset 0 -0.5px 0 rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+  z-index: 2;
+  animation: liquidSheen 10s ease-in-out infinite;
+}
+
+@keyframes liquidSheen {
+  0%, 100% {
+    background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(59, 154, 255, 0.04) 20%,
+      transparent 45%,
+      rgba(0, 212, 170, 0.03) 75%,
+      rgba(255, 255, 255, 0.05) 100%
+    );
+  }
+  33% {
+    background: linear-gradient(135deg,
+      rgba(0, 212, 170, 0.05) 0%,
+      rgba(255, 255, 255, 0.09) 35%,
+      rgba(59, 154, 255, 0.03) 60%,
+      transparent 80%
+    );
+  }
+  66% {
+    background: linear-gradient(135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.06) 25%,
+      rgba(0, 212, 170, 0.04) 55%,
+      rgba(59, 154, 255, 0.05) 85%,
+      rgba(255, 255, 255, 0.07) 100%
+    );
+  }
+}

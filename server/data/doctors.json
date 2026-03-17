@@ -1,0 +1,57 @@
+[
+  {
+    "id": "dr-chen",
+    "name": "Dr. Sarah Chen",
+    "specialty": "Family Medicine",
+    "title": "MD, FAAFP",
+    "bio": "Board-certified family physician with 12 years of experience in primary care.",
+    "keywords": ["general", "checkup", "cold", "flu", "fever", "fatigue", "headache", "annual physical", "diabetes", "wellness", "sick", "cough", "sore throat", "infection", "tired", "nausea", "stomach", "routine", "physical", "weight", "allergy", "allergies"],
+    "slotDurationMinutes": 30,
+    "workDays": [1, 2, 3, 4, 5],
+    "workHours": { "start": 9, "end": 17 }
+  },
+  {
+    "id": "dr-rodriguez",
+    "name": "Dr. Michael Rodriguez",
+    "specialty": "Orthopedics",
+    "title": "MD, FAAOS",
+    "bio": "Orthopedic surgeon specializing in sports medicine and joint reconstruction.",
+    "keywords": ["knee", "back", "shoulder", "joint", "bone", "fracture", "sprain", "sports injury", "hip", "elbow", "wrist", "ankle", "muscle", "ligament", "tendon", "swelling", "arthritis", "posture", "spine", "numbness", "stiffness", "knee pain", "back pain", "shoulder pain", "hip pain", "neck pain", "joint pain"],
+    "slotDurationMinutes": 30,
+    "workDays": [1, 2, 3, 4, 5],
+    "workHours": { "start": 8, "end": 16 }
+  },
+  {
+    "id": "dr-patel",
+    "name": "Dr. Priya Patel",
+    "specialty": "Dermatology",
+    "title": "MD, FAAD",
+    "bio": "Dermatologist with expertise in medical and cosmetic dermatology.",
+    "keywords": ["skin", "rash", "acne", "mole", "eczema", "psoriasis", "itching", "sunburn", "lesion", "cosmetic", "hair loss", "nail", "wart", "dermatitis", "hives", "dry skin", "bumps", "spots", "discoloration"],
+    "slotDurationMinutes": 20,
+    "workDays": [1, 2, 3, 4],
+    "workHours": { "start": 10, "end": 17 }
+  },
+  {
+    "id": "dr-wilson",
+    "name": "Dr. James Wilson",
+    "specialty": "Cardiology",
+    "title": "MD, FACC",
+    "bio": "Interventional cardiologist focused on preventive heart care and advanced diagnostics.",
+    "keywords": ["heart", "chest pain", "chest", "palpitations", "blood pressure", "shortness of breath", "cholesterol", "dizzy", "dizziness", "irregular heartbeat", "murmur", "circulation", "cardiovascular", "hypertension", "cardiac", "arrhythmia", "fainting", "heart attack", "heart failure"],
+    "slotDurationMinutes": 30,
+    "workDays": [1, 3, 4, 5],
+    "workHours": { "start": 9, "end": 16 }
+  },
+  {
+    "id": "dr-thompson",
+    "name": "Dr. Aisha Thompson",
+    "specialty": "Pediatrics",
+    "title": "MD, FAAP",
+    "bio": "Pediatrician providing compassionate care for children from birth through adolescence.",
+    "keywords": ["child", "baby", "infant", "toddler", "kid", "vaccination", "growth", "developmental", "pediatric", "children", "newborn", "teen", "adolescent", "immunization", "ear infection", "fever child", "rash child"],
+    "slotDurationMinutes": 20,
+    "workDays": [1, 2, 3, 4, 5],
+    "workHours": { "start": 8, "end": 17 }
+  }
+]
