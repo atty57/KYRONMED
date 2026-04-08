@@ -1,6 +1,6 @@
 # KyronMed AI Scheduling Assistant
 
-An intelligent medical scheduling platform that combines conversational AI chat with voice calling to deliver a seamless patient appointment booking experience. Patients interact with **Kyra**, an AI receptionist who collects intake information, matches symptoms to the right specialist, and books appointments — all through natural conversation.
+An intelligent medical scheduling platform that combines conversational AI chat with voice calling to deliver a seamless patient appointment booking experience. Patients interact with **Kyra**, an AI receptionist who collects intake information, matches symptoms to the right specialist, and books appointments all through natural conversation.
 
 ## Table of Contents
 
