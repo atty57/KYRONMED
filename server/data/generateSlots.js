@@ -13,7 +13,37 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const doctors = JSON.parse(fs.readFileSync(path.join(__dirname, 'doctors.json'), 'utf-8'));
 
-function generateSlots() {
+/**
+ * Build a slot record for a given day + wall-clock time.
+ *
+ * All three fields (datetime/date/time) are derived from the SAME local
+ * wall-clock basis so they are always internally consistent. The rest of the
+ * app treats these as naive local time: the UI parses `date + 'T00:00:00'`,
+ * bookSlot matches on the `date`/`time` strings, and slotManager parses
+ * `datetime` with `new Date()` (local). Emitting a UTC `toISOString()` here
+ * (the old behavior) made `date`/`datetime` disagree with `time` in any
+ * non-UTC timezone — e.g. in Sydney a 9am slot was stored on the previous
+ * calendar day — which broke date filtering and booking matches.
+ *
+ * @param {Date} dayDate - a Date at local midnight of the target day
+ * @param {number} hour   - local hour (0-23)
+ * @param {number} min    - local minute
+ */
+export function makeSlot(dayDate, hour, min) {
+  const y = dayDate.getFullYear();
+  const mo = String(dayDate.getMonth() + 1).padStart(2, '0');
+  const d = String(dayDate.getDate()).padStart(2, '0');
+  const date = `${y}-${mo}-${d}`;
+  const time = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+  return {
+    datetime: `${date}T${time}:00`,  // naive local, no tz suffix
+    date,
+    time,
+    available: true,
+  };
+}
+
+export function generateSlots() {
   const availability = {};
   const now = new Date();
   // Start from tomorrow
@@ -45,15 +75,7 @@ function generateSlots() {
           // Randomly remove ~25% of slots to feel realistic
           if (Math.random() < 0.25) continue;
 
-          const slotDate = new Date(date);
-          slotDate.setHours(hour, min, 0, 0);
-
-          slots.push({
-            datetime: slotDate.toISOString(),
-            date: slotDate.toISOString().split('T')[0],
-            time: `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`,
-            available: true,
-          });
+          slots.push(makeSlot(date, hour, min));
         }
       }
     }
@@ -67,4 +89,8 @@ function generateSlots() {
   console.log(`   Total slots: ${Object.values(availability).reduce((sum, s) => sum + s.length, 0)}`);
 }
 
-generateSlots();
+// Run only when invoked directly (e.g. `npm run generate-slots`),
+// so the helpers above can be imported by tests without writing files.
+if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
+  generateSlots();
+}
