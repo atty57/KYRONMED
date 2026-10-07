@@ -61,6 +61,15 @@ function parseTextFunctionCalls(content) {
 // ─── Day-of-week helper ───────────────────────────────────────────
 const DAY_NAMES = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
 
+// Format a Date as a local YYYY-MM-DD. Must be local (not toISOString, which is
+// UTC): the weekday test below uses local getDay(), and slot `date` fields are
+// local wall-clock, so a UTC date string would land on the wrong day in any
+// non-UTC timezone (e.g. an evening "Thursday" query returns Friday's date in
+// US zones).
+function toLocalDateStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
 function getNextDatesForDayOfWeek(dayName, count = 4) {
   const targetDay = DAY_NAMES.indexOf(dayName.toLowerCase());
   if (targetDay === -1) return [];
@@ -69,7 +78,7 @@ function getNextDatesForDayOfWeek(dayName, count = 4) {
   d.setDate(d.getDate() + 1); // start from tomorrow
   while (dates.length < count) {
     if (d.getDay() === targetDay) {
-      dates.push(d.toISOString().split('T')[0]);
+      dates.push(toLocalDateStr(d));
     }
     d.setDate(d.getDate() + 1);
   }
