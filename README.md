@@ -175,9 +175,10 @@ PORT=3001                           # Backend port
 NODE_ENV=development                # development | production
 SESSION_SECRET=change-me            # Session signing secret
 FRONTEND_URL=http://localhost:5173  # CORS origin
+ADMIN_PASSWORD=change-me            # Required: admin dashboard password (panel disabled until set)
 ```
 
-Voice and email features degrade gracefully — the chat works without them configured.
+Voice and email features degrade gracefully — the chat works without them configured. The admin dashboard is disabled until `ADMIN_PASSWORD` is set.
 
 ## Project Structure
 
