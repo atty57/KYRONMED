@@ -4,15 +4,25 @@ import { cancelSlot } from '../services/slotManager.js';
 
 const router = Router();
 
-const ADMIN_PASSWORD = 'kyronmed2026';
+// Admin secret comes from the environment — never hardcoded. If it is unset
+// the admin panel fails closed (503) rather than accepting a committed default.
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
+if (!ADMIN_PASSWORD) {
+  console.warn('⚠️  ADMIN_PASSWORD not set — admin panel is disabled until it is configured in .env');
+}
+
+/** True only when a secret is configured and the supplied value matches it. */
+export function isAuthorized(key) {
+  return !!ADMIN_PASSWORD && key === ADMIN_PASSWORD;
+}
 
 /**
  * POST /api/admin/login
  * Validates admin password. No token — just a gate.
  */
 router.post('/login', (req, res) => {
-  const { password } = req.body;
-  if (password === ADMIN_PASSWORD) {
+  if (!ADMIN_PASSWORD) return res.status(503).json({ error: 'Admin access is not configured.' });
+  if (isAuthorized(req.body?.password)) {
     return res.json({ ok: true });
   }
   return res.status(401).json({ error: 'Invalid password' });
@@ -20,7 +30,8 @@ router.post('/login', (req, res) => {
 
 // Protect all routes below
 function requireAdmin(req, res, next) {
-  if (req.headers['x-admin-key'] === ADMIN_PASSWORD) return next();
+  if (!ADMIN_PASSWORD) return res.status(503).json({ error: 'Admin access is not configured.' });
+  if (isAuthorized(req.headers['x-admin-key'])) return next();
   return res.status(401).json({ error: 'Unauthorized' });
 }
 router.use(requireAdmin);
