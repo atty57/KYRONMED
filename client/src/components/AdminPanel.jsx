@@ -156,11 +156,18 @@ export default function AdminPanel() {
     );
   }
 
-  const confirmed = appointments.filter(a => a.booking?.status !== 'cancelled');
+  // Only count genuinely active appointments. 'rescheduled' (slot already
+  // freed) and 'previous' (stale) are not live bookings, so excluding just
+  // 'cancelled' over-counted them.
+  const confirmed = appointments.filter(a => a.booking?.status === 'confirmed');
+  // Local YYYY-MM-DD — booking.date fields are local wall-clock, so comparing
+  // against a UTC toISOString() date miscounted today/upcoming near midnight.
+  const now = new Date();
+  const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
   const stats = {
     total: confirmed.length,
-    today: confirmed.filter(a => a.booking?.date === new Date().toISOString().split('T')[0]).length,
-    upcoming: confirmed.filter(a => a.booking?.date > new Date().toISOString().split('T')[0]).length,
+    today: confirmed.filter(a => a.booking?.date === todayStr).length,
+    upcoming: confirmed.filter(a => a.booking?.date > todayStr).length,
   };
 
   return (
